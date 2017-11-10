@@ -20,8 +20,5 @@ function init_dotfiles() {
   $dotfiles/bin/init "$@" && src
 }
 
-echo $dotfiles
-
 src
-
 
