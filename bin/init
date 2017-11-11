@@ -1,4 +1,5 @@
 #!/bin/bash
+
 [[ "$1" == "source" ]] || \
 
 echo 'dotfiles - https://github.com/fampinheiro/dotfiles.git'

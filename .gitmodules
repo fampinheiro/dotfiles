@@ -1,0 +1,9 @@
+[submodule "deps/iterm-dracula"]
+	path = deps/iterm-dracula
+	url = https://github.com/dracula/iterm.git
+[submodule "deps/xcode-dracule"]
+	path = deps/xcode-dracule
+	url = https://github.com/dracula/xcode.git
+[submodule "deps/xcode-dracula"]
+	path = deps/xcode-dracula
+	url = https://github.com/dracula/xcode.git

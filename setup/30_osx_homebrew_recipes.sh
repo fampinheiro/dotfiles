@@ -13,6 +13,7 @@ recipes=(
   rbenv
   reattach-to-user-namespace
   tmux
+  zsh
   z
 )
 
@@ -36,6 +37,7 @@ fi
 
 recipes=(
   appdelete
+  evernote
   franz
   grammarly
   spotify
