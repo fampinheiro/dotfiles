@@ -1,5 +1,7 @@
 [alias]
     s = status -s
+    l = log --oneline --decorate
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
 [color]
     ui = auto
 [color "branch"]
@@ -16,6 +18,10 @@
     added = green
     changed = yellow
     untracked = normal
+[core]
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+  editor = vim
 [user]
     email = me@fampinheiro.com
     name = Filipe Pinheiro
