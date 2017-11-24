@@ -10,6 +10,7 @@ recipes=(
   docker
   git
   hub
+  jenv
   rbenv
   reattach-to-user-namespace
   tmux
@@ -18,6 +19,30 @@ recipes=(
 )
 
 brew_install_recipes
+
+# homebrew cask recipes
+
+cask_recipes=(
+  android-ndk
+  android-sdk
+  android-studio
+  appdelete
+  evernote
+  fantastical
+  franz
+  google-chrome
+  grammarly
+  java
+  java8
+  lastpass
+  spectacle
+  spotify
+  tunnelblick
+  visual-studio-code
+  zoomus
+)
+
+brew_cask_install_recipes
 
 # this is where brew stores its binary symlinks
 local binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
@@ -33,21 +58,3 @@ if [[ "$(dscl . -read ~ UserShell | awk '{print $2}')" != "$binroot/bash" ]]; th
   e_arrow "please exit and restart all your shells."
 fi
 
-# homebrew cask recipes
-
-recipes=(
-  appdelete
-  evernote
-  franz
-  grammarly
-  spotify
-  visual-studio-code
-  fantastical
-  google-chrome
-  lastpass
-  tunnelblick
-  zoomus
-)
-
-# this is where brew stores its binary symlinks
-local binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin

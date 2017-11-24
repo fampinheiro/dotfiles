@@ -33,3 +33,7 @@ npm-debug.log
 .vagrant
 .floo*
 *.log
+
+## EDITORS
+.idea
+.vscode

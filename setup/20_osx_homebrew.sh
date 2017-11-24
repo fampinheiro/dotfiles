@@ -38,10 +38,11 @@ function brew_install_recipes() {
 
 # install homebrew recipes.
 function brew_cask_install_recipes() {
-  recipes=($(setdiff "${recipes[*]}" "$(brew cask list)"))
-  if (( ${#recipes[@]} > 0 )); then
-    e_header "installing homebrew recipes: ${recipes[*]}"
-    for recipe in "${recipes[@]}"; do
+  cask_recipes=($(setdiff "${cask_recipes[*]}" "$(brew cask list)"))
+  echo $cask_recipes
+  if (( ${#cask_recipes[@]} > 0 )); then
+    e_header "installing homebrew recipes: ${cask_recipes[*]}"
+    for recipe in "${cask_recipes[@]}"; do
       brew cask install $recipe
     done
   fi
