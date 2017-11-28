@@ -30,11 +30,13 @@ cask_recipes=(
   evernote
   fantastical
   franz
+  google-backup-and-sync
   google-chrome
   grammarly
   java
   java8
   lastpass
+  microsoft-office
   spectacle
   spotify
   tunnelblick
