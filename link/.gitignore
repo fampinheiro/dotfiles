@@ -1,3 +1,6 @@
+.env
+.vscode
+
 # OSX
 .DS_Store
 .AppleDouble
@@ -33,6 +36,7 @@ npm-debug.log
 .vagrant
 .floo*
 *.log
+*.csv
 
 ## EDITORS
 .idea

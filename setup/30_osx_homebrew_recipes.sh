@@ -8,11 +8,13 @@ recipes=(
   ag
   bash
   docker
+  fzf
   git
   hub
   jenv
   rbenv
   reattach-to-user-namespace
+  terraform
   tmux
   zsh
   z
@@ -23,25 +25,13 @@ brew_install_recipes
 # homebrew cask recipes
 
 cask_recipes=(
-  android-ndk
-  android-sdk
-  android-studio
-  appdelete
-  evernote
   fantastical
-  franz
   google-backup-and-sync
   google-chrome
   grammarly
-  java
-  java8
-  lastpass
   microsoft-office
   spectacle
   spotify
-  tunnelblick
-  visual-studio-code
-  zoomus
 )
 
 brew_cask_install_recipes

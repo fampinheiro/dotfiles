@@ -20,9 +20,9 @@
     changed = yellow
     untracked = normal
 [core]
-  excludesfile = ~/.gitignore
-  attributesfile = ~/.gitattributes
-  editor = vim
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
+    editor = vim
 [user]
     email = me@fampinheiro.com
     name = Filipe Pinheiro
