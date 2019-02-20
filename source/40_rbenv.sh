@@ -1,1 +1,4 @@
-eval "$(rbenv init -)"
+if [ ! -z "$(type -P rbenv)" ]; then
+  eval "$(rbenv init -)"
+fi
+
