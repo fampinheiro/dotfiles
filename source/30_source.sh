@@ -1,2 +1,2 @@
-Z_PATH=/usr/local/etc/profile.d/z.sh
-[ -f $Z_PATH ] && . $Z_PATH
+AUTOJUMP_PATH=/usr/share/autojump/autojump.sh
+[ -f $AUTOJUMP_PATH ] && . $AUTOJUMP_PATH
