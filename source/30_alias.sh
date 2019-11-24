@@ -2,6 +2,10 @@
 alias r="fc -s"
 
 if [ ! -z "$(type -P hub)" ]; then
-  alias git='hub'
+  alias git="hub"
+fi
+
+if [ ! -z "$(type -P nvim)" ]; then
+  alias vim="nvim"
 fi
 
