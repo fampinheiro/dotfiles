@@ -16,7 +16,7 @@ function src() {
 }
 
 # run dotfiles script, then source.
-function init_dotfiles() {
+function initdf() {
   $dotfiles/bin/init "$@" && src
 }
 

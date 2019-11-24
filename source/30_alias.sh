@@ -6,6 +6,6 @@ if [ ! -z "$(type -P hub)" ]; then
 fi
 
 if [ ! -z "$(type -P nvim)" ]; then
-  alias vim="nvim"
+  alias vim="nvim +PlugInstall +qall && nvim"
 fi
 
