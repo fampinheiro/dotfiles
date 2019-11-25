@@ -16,9 +16,9 @@ Plug 'airblade/vim-gitgutter'
 
 " syntax
 Plug 'moll/vim-node'
-Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
-Plug 'mxw/vim-jsx', {'for': ['javascript', 'javascript.jsx']}
-Plug 'styled-components/vim-styled-components', {'for': ['javascript', 'javascript.jsx']}
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tpope/vim-git'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', { 'for': 'go' }

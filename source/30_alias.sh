@@ -13,3 +13,6 @@ if [ ! -z "$(type -P thefuck)" ]; then
   eval "$(thefuck --alias)"
 fi
 
+if [ -f ~/.fzf.bash ]; then
+  source ~/.fzf.bash
+fi
