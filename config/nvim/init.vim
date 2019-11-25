@@ -11,10 +11,14 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
+" navigation
+Plug 'airblade/vim-gitgutter'
+
 " syntax
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
 Plug 'mxw/vim-jsx', {'for': ['javascript', 'javascript.jsx']}
+Plug 'styled-components/vim-styled-components', {'for': ['javascript', 'javascript.jsx']}
 Plug 'tpope/vim-git'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', { 'for': 'go' }
@@ -28,6 +32,14 @@ Plug 'mattn/emmet-vim'
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-runner'
+
+" misc
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim'
 
 " easily surround sutff with tags, brackets, quotes, etc
 Plug 'tpope/vim-surround'
@@ -58,3 +70,4 @@ if exists('g:colors_name')
     execute 'source '.coloursettings
   endif
 endif
+

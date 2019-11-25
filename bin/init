@@ -1,14 +1,17 @@
 #!/bin/bash
-
 [[ "$1" == "source" ]] || \
 
-echo 'dotfiles - https://github.com/fampinheiro/dotfiles.git'
+echo '
+dotfiles - https://github.com/fampinheiro/dotfiles.git
+inspired by "Cowboy" Ben Alman - http://benalman.com/
+'
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
 Usage: $(basename "$0")
 
 See the README for documentation.
+https://github.com/fampinheiro/dotfiles
 HELP
 exit; fi
 
@@ -17,21 +20,37 @@ exit; fi
 ###########################################
 
 # where the magic happens.
-export dotfiles=~/.dotfiles
+export DOTFILES=~/.dotfiles
 
 # logging stuff.
-function e_header()   { echo "\n\033[1m$@\033[0m"; }
-function e_success()  { echo " \033[1;32m✔\033[0m  $@"; }
-function e_error()    { echo " \033[1;31m✖\033[0m  $@"; }
-function e_arrow()    { echo " \033[1;34m➜\033[0m  $@"; }
+function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
+function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+function e_arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 # for testing.
 function assert() {
-  local success modes equals actual expected
-  modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
-  actual="$("$@")"
-  [[ "$actual" == "$expected" ]] && success=1 || success=0
-  ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
+  local success modes equals result
+  modes=(e_error e_success); equals=("!=" "==");
+  [[ "$1" == "$2" ]] && success=1 || success=0
+  if [[ "$(echo "$1" | wc -l)" != 1 || "$(echo "$2" | wc -l)" != 1 ]]; then
+    result="$(diff <(echo "$1") <(echo "$2") | sed '
+      s/^\([^<>-].*\)/===[\1]====================/
+      s/^\([<>].*\)/\1|/
+      s/^< /actual   |/
+      s/^> /expected |/
+      2,$s/^/    /
+    ')"
+    [[ ! "$result" ]] && result="(multiline comparison)"
+  else
+    result="\"$1\" ${equals[success]} \"$2\""
+  fi
+  ${modes[success]} "$result"
+}
+
+# test if the dotfiles script is currently
+function is_dotfiles_running() {
+  [[ "$DOTFILES_SCRIPT_RUNNING" ]] || return 1
 }
 
 # os detection
@@ -156,17 +175,23 @@ function setdiff() {
 # INTERNAL dotfiles "INIT" VARS / FUNCTIONS
 ###########################################
 
+DOTFILES_SCRIPT_RUNNING=1
+function cleanup {
+  unset DOTFILES_SCRIPT_RUNNING
+}
+trap cleanup EXIT
+
 # initialize.
-setup_file=$dotfiles/.cache/setup/selection
-function setup_files() {
+init_file=$DOTFILES/.cache/setup/selection
+function init_files() {
   local i f dirname oses os opt remove
   dirname="$(dirname "$1")"
   f=("$@")
   menu_options=(); menu_selects=()
   for i in "${!f[@]}"; do menu_options[i]="$(basename "${f[i]}")"; done
-  if [[ -e "$setup_file" ]]; then
+  if [[ -e "$init_file" ]]; then
     # Read cache file if possible
-    IFS=$'\n' read -d '' -r -a menu_selects < "$setup_file"
+    IFS=$'\n' read -d '' -r -a menu_selects < "$init_file"
   else
     # Otherwise default to all scripts not specifically for other OSes
     oses=($(get_os 1))
@@ -180,13 +205,13 @@ function setup_files() {
   fi
   prompt_menu "run the following setup scripts?" $prompt_delay
   # Write out cache file for future reading.
-  rm "$setup_file" 2>/dev/null
+  rm "$init_file" 2>/dev/null
   for i in "${!menu_selects[@]}"; do
-    echo "${menu_selects[i]}" >> "$setup_file"
+    echo "${menu_selects[i]}" >> "$init_file"
     echo "$dirname/${menu_selects[i]}"
   done
 }
-function setup_do() {
+function init_do() {
   e_header "sourcing $(basename "$2")"
   source "$2"
 }
@@ -215,45 +240,63 @@ function link_do() {
   ln -sf ${2#$HOME/} ~/
 }
 
+# Link config files.
+function config_header() { e_header "linking files into ~/.config directory"; }
+function config_dest() {
+  echo "$HOME/.config/$base"
+}
+function config_test() {
+  [[ "$1" -ef "$2" ]] && echo "same file"
+}
+function config_do() {
+  e_success "linking ~/.config/$1."
+  ln -sf ../${2#$HOME/} ~/.config/
+}
+
 # copy, link, setup, etc.
 function do_setup() {
   local base dest skip
-  local files=($dotfiles/$1/*)
+  local files=($DOTFILES/$1/*)
   [[ $(declare -f "$1_files") ]] && files=($($1_files "${files[@]}"))
-  # No files? abort.
+  # no files? abort.
   if (( ${#files[@]} == 0 )); then return; fi
-  # Run _header function only if declared.
+  # run _header function only if declared.
   [[ $(declare -f "$1_header") ]] && "$1_header"
-  # Iterate over files.
+  # iterate over files.
   for file in "${files[@]}"; do
     base="$(basename $file)"
-    dest="$HOME/$base"
-    # Run _test function only if declared.
+    # get dest path.
+    if [[ $(declare -f "$1_dest") ]]; then
+      dest="$("$1_dest" "$base")"
+    else
+      dest="$HOME/$base"
+    fi
+    # run _test function only if declared.
     if [[ $(declare -f "$1_test") ]]; then
-      # If _test function returns a string, skip file and print that message.
+      # if _test function returns a string, skip file and print that message.
       skip="$("$1_test" "$file" "$dest")"
       if [[ "$skip" ]]; then
         e_error "skipping ~/$base, $skip."
         continue
       fi
-      # Destination file already exists in ~/. Back it up!
+      # destination file already exists in ~/. Back it up!
       if [[ -e "$dest" ]]; then
         e_arrow "backing up ~/$base."
-        # Set backup flag, so a nice message can be shown at the end.
+        # set backup flag, so a nice message can be shown at the end.
         backup=1
-        # Create backup dir if it doesn't already exist.
+        # create backup dir if it doesn't already exist.
         [[ -e "$backup_dir" ]] || mkdir -p "$backup_dir"
-        # Backup file / link / whatever.
+        # backup file / link / whatever.
         mv "$dest" "$backup_dir"
       fi
     fi
-    # Do stuff.
+    # do stuff.
     "$1_do" "$base" "$file"
   done
 }
 
 # enough with the functions, let's do stuff.
-
+# set the prompt delay to be longer for the very first run.
 export prompt_delay=5
 
 # ensure that we can actually, like, compile anything.
@@ -262,7 +305,7 @@ if [[ ! "$(type -P gcc)" ]] && is_osx; then
   exit 1
 fi
 
-# if Git is not installed, install it (Ubuntu only, since Git comes standard
+# if git is not installed, install it (ubuntu only, since git comes standard
 # with recent XCode or CLT)
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
   e_header "installing Git"
@@ -283,57 +326,56 @@ fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!
 if [[ ! "$(type -P git)" ]]; then
-  e_error "Git should be installed. It isn't. Aborting."
+  e_error "git should be installed. It isn't. Aborting."
   exit 1
 fi
 
 # initialize
-if [[ ! -d $dotfiles ]]; then
-  # $dotfiles directory doesn't exist? Clone it!
+if [[ ! -d $DOTFILES ]]; then
+  # $DOTFILES directory doesn't exist? Clone it!
   new_dotfiles_install=1
   prompt_delay=15
   e_header "Downloading dotfiles"
-  git clone --recursive https://github.com/${github_user:-fampinheiro}/dotfiles.git $dotfiles
-  cd $dotfiles
+  git clone --branch ${DOTFILES_GH_BRANCH:-master} --recursive \
+    git://github.com/${DOTFILES_GH_USER:-fampinheiro}/dotfiles.git $DOTFILES
+  cd $DOTFILES
 elif [[ "$1" != "restart" ]]; then
-  # Make sure we have the latest files.
-  e_header "Updating dotfiles"
-  cd $dotfiles
+  # make sure we have the latest files.
+  e_header "updating dotfiles"
+  cd $DOTFILES
   prev_head="$(git rev-parse HEAD)"
   git pull
+  git submodule update --init --recursive --quiet
   if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
-    e_header "Changes detected, restarting script"
+    e_header "changes detected, restarting script"
     exec "$0" "restart"
   fi
 fi
 
-# update submodules
-git submodule update --init --recursive --quiet
-
 # Add binaries into the path
-[[ -d $dotfiles/bin ]] && PATH=$dotfiles/bin:$PATH
-export PATH
+[[ -d $DOTFILES/bin ]] && export PATH=$DOTFILES/bin:$PATH
 
 # tweak file globbing.
 shopt -s dotglob
 shopt -s nullglob
 
 # create caches dir and setup subdir, if they don't already exist.
-mkdir -p "$dotfiles/.cache/setup"
+mkdir -p "$DOTFILES/.cache/init"
 
 # if backups are needed, this is where they'll go.
-backup_dir="$dotfiles/.backup/$(date "+%Y_%m_%d-%H_%M_%S")/"
+backup_dir="$DOTFILES/.backup/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
 # execute code for each file in these subdirectories.
 do_setup "copy"
 do_setup "link"
-do_setup "setup"
+do_setup "config"
+do_setup "init"
 
 # alert if backups were made.
 if [[ "$backup" ]]; then
-  echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
+  echo -e "\nbackups were moved to ~/${backup_dir#$HOME/}"
 fi
 
 # all done!
-e_header "Finish!"
+e_header "finish!"
