@@ -1,6 +1,7 @@
 .env
 .vscode
 coverage
+.netrwhist
 
 # OSX
 .DS_Store
