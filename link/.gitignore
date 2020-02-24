@@ -32,6 +32,7 @@ Temporary Items
 npm-debug.log
 *.old
 *.swp
+.netrwhist
 
 ## Tools
 .vagrant

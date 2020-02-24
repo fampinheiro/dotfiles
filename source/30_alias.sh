@@ -9,3 +9,7 @@ if [ ! -z "$(type -P nvim)" ]; then
   alias vim="nvim"
 fi
 
+if [ ! -z "$(type -P thefuck)" ]; then
+  eval "$(thefuck --alias)"
+fi
+
