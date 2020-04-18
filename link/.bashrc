@@ -1,8 +1,5 @@
 export dotfiles=~/.dotfiles
 
-PATH=$dotfiles/bin:/usr/local/sbin:$PATH
-export PATH
-
 # source all files in "source"
 function src() {
   local file
@@ -16,8 +13,8 @@ function src() {
 }
 
 # run dotfiles script, then source.
-function initdf() {
-  $dotfiles/bin/init "$@" && src
+function dotfiles() {
+  $dotfiles/bin/dotfiles "$@" && src
 }
 
 src

@@ -1,52 +1,47 @@
 is_osx || return 1
 
-# exit if brew is not installed
-[[ ! "$(type -P brew)" ]] && e_error "what am i doing here if brew cannot be found" && return 1
+# Exit if Homebrew is not installed.
+[[ ! "$(type -P brew)" ]] && e_error "Brew recipes need Homebrew to install." && return 1
 
-# homebrew recipes
+# Homebrew recipes
 recipes=(
   ag
+  aws-vault
+  awscli
   bash
-  docker
-  fzf
   git
+  git-extras
   hub
-  jenv
-  rbenv
+  jq
+  nvm
   reattach-to-user-namespace
-  terraform
-  tmux
-  zsh
-  z
+  ssh-copy-id
+  terminal-notifier
+  thefuck
+  wget
 )
 
 brew_install_recipes
 
-# homebrew cask recipes
+# Misc cleanup!
 
-cask_recipes=(
-  fantastical
-  google-backup-and-sync
-  google-chrome
-  grammarly
-  microsoft-office
-  spectacle
-  spotify
-)
-
-brew_cask_install_recipes
-
-# this is where brew stores its binary symlinks
+# This is where brew stores its binary symlinks
 local binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
+
+# htop
+if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop")" != "root:wheel" ]]; then
+  e_header "Updating htop permissions"
+  sudo chown root:wheel "$binroot/htop"
+  sudo chmod u+s "$binroot/htop"
+fi
 
 # bash
 if [[ "$(type -P $binroot/bash)" && "$(cat /etc/shells | grep -q "$binroot/bash")" ]]; then
-  e_header "adding $binroot/bash to the list of acceptable shells"
+  e_header "Adding $binroot/bash to the list of acceptable shells"
   echo "$binroot/bash" | sudo tee -a /etc/shells >/dev/null
 fi
 if [[ "$(dscl . -read ~ UserShell | awk '{print $2}')" != "$binroot/bash" ]]; then
-  e_header "making $binroot/bash your default shell"
+  e_header "Making $binroot/bash your default shell"
   sudo chsh -s "$binroot/bash" "$USER" >/dev/null 2>&1
-  e_arrow "please exit and restart all your shells."
+  e_arrow "Please exit and restart all your shells."
 fi
-
