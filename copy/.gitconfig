@@ -24,5 +24,9 @@
     attributesfile = ~/.gitattributes
     editor = vim
 [user]
-    email = me@fampinheiro.com
+    email = hey@fampinheiro.com
     name = Filipe Pinheiro
+[includeIf "gitdir:~/dev/github.com/yldio/"]
+    path = ~/dev/github.com/yldio/.gitconfig
+[includeIf "gitdir:~/dev/gitlab.com/yldio/"]
+    path = ~/dev/gitlab.com/yldio/.gitconfig

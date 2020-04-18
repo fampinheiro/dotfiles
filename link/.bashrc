@@ -1,12 +1,12 @@
-export dotfiles=~/.dotfiles
+export DOTFILES=~/.dotfiles
 
 # source all files in "source"
 function src() {
   local file
   if [[ "$1" ]]; then
-    source "$dotfiles/source/$1.sh"
+    source "$DOTFILES/source/$1.sh"
   else
-    for file in $dotfiles/source/*; do
+    for file in $DOTFILES/source/*; do
       source "$file"
     done
   fi
@@ -14,7 +14,7 @@ function src() {
 
 # run dotfiles script, then source.
 function dotfiles() {
-  $dotfiles/bin/dotfiles "$@" && src
+  $DOTFILES/bin/dotfiles "$@" && src
 }
 
 src
