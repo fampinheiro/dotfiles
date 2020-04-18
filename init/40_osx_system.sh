@@ -9,20 +9,17 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 # show the ~/Library folder
 chflags nohidden ~/Library
 
-# set the icon size of Dock items to 24 pixels
+# dock settings
 defaults write com.apple.dock tilesize -int 36
-
-# change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
-
-# minimize windows into their application’s icon
+defaults write com.apple.dock orientation left
 defaults write com.apple.dock minimize-to-application -bool true
-
-# enable spring loading for all Dock items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
-
-# show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock showhidden -bool true
+
+killall Dock
 
 # disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
@@ -32,12 +29,6 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 
 # don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
-
-# automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
-
-# make Dock icons of hidden applications translucent
-defaults write com.apple.dock showhidden -bool true
 
 ###############################################################################
 # trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -68,3 +59,4 @@ defaults write com.apple.terminal StringEncodings -array 4
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 defaults write com.apple.finder AppleShowAllFiles -bool true
+

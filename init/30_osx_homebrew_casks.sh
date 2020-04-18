@@ -15,14 +15,15 @@ brew cask info dumb 2>/dev/null
 
 # Homebrew casks
 casks=(
+  1password
   chromium
   docker
   dropbox
   firefox
   iterm2
+  keybase
   slack
   spotify
-  steam
   the-unarchiver
   visual-studio-code
 )
