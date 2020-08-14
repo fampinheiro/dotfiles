@@ -15,16 +15,7 @@ brew cask info dumb 2>/dev/null
 
 # Homebrew casks
 casks=(
-  chromium
-  docker
-  dropbox
-  firefox
-  iterm2
-  slack
-  spotify
-  steam
-  the-unarchiver
-  visual-studio-code
+
 )
 
 # Install Homebrew casks.

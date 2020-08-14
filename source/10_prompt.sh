@@ -1,0 +1,1 @@
+[ ! -z "$(type -P starship)" ] && eval "$(starship init bash)"
