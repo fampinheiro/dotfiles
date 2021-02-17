@@ -1,0 +1,12 @@
+tap "homebrew/bundle"
+tap "homebrew/core"
+
+brew "act"
+brew "autojump"
+brew "aws-vault"
+brew "coreutils"
+brew "git"
+brew "git-extras"
+brew "jq"
+brew "ssh-copy-id"
+brew "the_silver_searcher"
