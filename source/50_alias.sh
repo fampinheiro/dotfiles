@@ -25,3 +25,5 @@ alias lsd='ls -l | grep "^d"'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'
+
+[ ! -z "$(type -P nvim)" ] && alias vim="nvim"
