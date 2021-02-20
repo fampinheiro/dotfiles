@@ -10,8 +10,9 @@ endif
 " navigation
 Plug 'airblade/vim-gitgutter'
 
-" linter
+" linter and friends
 Plug 'w0rp/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " misc
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
