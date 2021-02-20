@@ -1,7 +1,11 @@
 # Install Homebrew.
 if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
-  true | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if is_osx; then
+    true | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else if is_ubuntu; then
+    true | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 fi
 
 # Exit if, for some reason, Homebrew is not installed.
@@ -10,7 +14,4 @@ fi
 e_header "Updating Homebrew"
 
 brew doctor
-brew update
-
-(cd $DOTFILES/misc && brew bundle)
-brew cleanup
+brew bundle --file $DOTFILES/misc/Brewfile --cleanup

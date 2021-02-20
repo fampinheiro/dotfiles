@@ -1,42 +1,43 @@
 [user]
-  name = Filipe Pinheiro
-  email = EMAIL
+    name = Filipe Pinheiro
+    email = EMAIL
 [core]
-  autocrlf = input
-  whitespace = fix,space-before-tab,tab-in-indent,trailing-space
-  excludesfile = ~/.gitignore_global
-  editor = vim
+    autocrlf = input
+    whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+    excludesfile = ~/.gitignore_global
+    editor = vim
 [apply]
-  whitespace = fix
+    whitespace = fix
 [alias]
-  s = status -s
-  l = log --oneline --decorate
-  tree = log --graph --decorate --pretty=oneline --abbrev-commit
-  pr = pull --rebase
+    s = status -s
+    l = log --oneline --decorate
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+    pr = pull --rebase
 [color]
-  ui = auto
+    ui = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  plain = red reverse
-  remote = green
+    current = yellow reverse
+    local = yellow
+    plain = red reverse
+    remote = green
 [color "diff"]
-  frag = yellow reverse
-  meta = yellow bold
-  new = green bold
-  old = red bold
+    frag = yellow reverse
+    meta = yellow bold
+    new = green bold
+    old = red bold
 [color "status"]
-  added = green
-  changed = yellow
-  untracked = normal
+    added = green
+    changed = yellow
+    untracked = normal
 [pull]
-  ff = only
+    ff = only
 [push]
-  default = simple
+    default = simple
 [merge]
-  log = true
+    log = true
+
 # custom area
 [includeIf "gitdir:~/dev/github.com/yldio/"]
-  path = ~/dev/github.com/yldio/.gitconfig
+    path = ~/dev/github.com/yldio/.gitconfig
 [includeIf "gitdir:~/dev/gitlab.com/yldio/"]
-  path = ~/dev/gitlab.com/yldio/.gitconfig
+    path = ~/dev/gitlab.com/yldio/.gitconfig

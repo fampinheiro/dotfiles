@@ -2,8 +2,6 @@ BREW_PREFIX=$(brew --prefix)
 
 [ "$BREW_PREFIX" ] || return 1;
 
-
-
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
   source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 else
