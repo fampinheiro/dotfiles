@@ -1,6 +1,8 @@
 [user]
     name = Filipe Pinheiro
     email = EMAIL
+[init]
+    defaultBranch = main
 [core]
     autocrlf = input
     whitespace = fix,space-before-tab,tab-in-indent,trailing-space
