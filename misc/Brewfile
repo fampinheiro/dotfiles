@@ -1,15 +1,19 @@
 tap "homebrew/bundle"
+tap "homebrew/cask"
 tap "homebrew/core"
 brew "act"
 brew "autojump"
-brew "aws-vault"
 brew "coreutils"
 brew "gh"
 brew "git"
 brew "git-extras"
 brew "jq"
+brew "mas"
 brew "neovim"
 brew "ssh-copy-id"
 brew "the_silver_searcher"
+cask "aws-vault"
 cask "iterm2"
-cask "keybase"
+mas "Dato", id: 1470584107
+mas "Slack", id: 803453959
+mas "Xcode", id: 497799835

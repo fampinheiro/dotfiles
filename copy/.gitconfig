@@ -39,7 +39,5 @@
     log = true
 
 # custom area
-[includeIf "gitdir:~/dev/github.com/yldio/"]
-    path = ~/dev/github.com/yldio/.gitconfig
-[includeIf "gitdir:~/dev/gitlab.com/yldio/"]
-    path = ~/dev/gitlab.com/yldio/.gitconfig
+[includeIf "gitdir:~/dev/github.com/moonpay/"]
+    path = ~/dev/github.com/moonpay/.gitconfig

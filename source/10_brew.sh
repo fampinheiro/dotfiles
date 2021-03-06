@@ -1,6 +1,6 @@
-BREW_PREFIX=$(brew --prefix)
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-[ "$BREW_PREFIX" ] || return 1;
+[ "$HOMEBREW_PREFIX" ] || return 1;
 
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
   source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
@@ -10,4 +10,4 @@ else
   done
 fi
 
-[ -f $BREW_PREFIX/etc/profile.d/autojump.sh ] && . $BREW_PREFIX/etc/profile.d/autojump.sh
+[ -f $HOMEBREW_PREFIX/etc/profile.d/autojump.sh ] && . $HOMEBREW_PREFIX/etc/profile.d/autojump.sh
