@@ -1,0 +1,1 @@
+/home/fampinheiro/.fzf/shell/key-bindings.fish

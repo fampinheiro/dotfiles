@@ -1,5 +1,6 @@
 # Install Homebrew.
-if [[ ! "$(type -P brew)" ]]; then
+if [[ ! "$(type -P brew)" ]]
+then
   e_header "Installing Homebrew"
   true | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
