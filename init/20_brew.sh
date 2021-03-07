@@ -11,4 +11,3 @@ e_header "Updating Homebrew"
 
 brew doctor
 brew bundle --file "$DOTFILES/misc/Brewfile" --cleanup
-

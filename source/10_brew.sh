@@ -1,13 +1,6 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-[ "$HOMEBREW_PREFIX" ] || return 1;
-
-if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-  source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-else
-  for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-    [[ -r "$COMPLETION" ]] && source "$COMPLETION"
-  done
+if is_osx; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
+elif is_ubuntu; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
-
-[ -f $HOMEBREW_PREFIX/etc/profile.d/autojump.sh ] && . $HOMEBREW_PREFIX/etc/profile.d/autojump.sh

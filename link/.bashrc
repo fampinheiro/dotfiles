@@ -1,5 +1,8 @@
 export DOTFILES=~/.dotfiles
 
+PATH=$DOTFILES/bin:$PATH
+export PATH
+
 # source all files in "source"
 function src() {
   local file

@@ -26,4 +26,4 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'
 
-[ ! -z "$(type -P nvim)" ] && alias vim="nvim"
+[ ! -z "$(type -p nvim)" ] && alias vim="nvim"
