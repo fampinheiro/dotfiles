@@ -1,4 +1,4 @@
-# is_osx || return 1
+is_osx || return 1
 
 # avoid creating dsstore files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
