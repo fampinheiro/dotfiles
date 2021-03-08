@@ -20,7 +20,6 @@ brew "zsh"
 cask "1password-cli"
 cask "aws-vault"
 cask "font-fira-code"
-cask "iterm2"
 mas "Dato", id: 1470584107
 mas "Magnet", id: 441258766
 mas "Slack", id: 803453959

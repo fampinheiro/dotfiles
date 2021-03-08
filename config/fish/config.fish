@@ -1,2 +1,6 @@
+set -gx color_scheme 1
+set -gx fish_emoji_width 2
+set -gx DOTFILES $HOME/.dotfiles
+
 # misc
-set -g -x GPG_TTY (tty)
+set -gx GPG_TTY (tty)
