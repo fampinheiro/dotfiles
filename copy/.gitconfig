@@ -37,7 +37,3 @@
     default = simple
 [merge]
     log = true
-
-# custom area
-[includeIf "gitdir:~/dev/github.com/moonpay/"]
-    path = ~/dev/github.com/moonpay/.gitconfig

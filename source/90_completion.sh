@@ -8,5 +8,3 @@ else
     [[ -r "$COMPLETION" ]] && source "$COMPLETION"
   done
 fi
-
-[ -f $HOMEBREW_PREFIX/etc/profile.d/autojump.sh ] && . $HOMEBREW_PREFIX/etc/profile.d/autojump.sh
