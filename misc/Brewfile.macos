@@ -6,6 +6,7 @@ brew "act"
 brew "autojump"
 brew "coreutils"
 brew "fish"
+brew "fzf"
 brew "gh"
 brew "git"
 brew "git-extras"
@@ -20,6 +21,8 @@ brew "zsh"
 cask "1password-cli"
 cask "aws-vault"
 cask "font-fira-code"
+cask "postico"
+cask "postman"
 mas "Dato", id: 1470584107
 mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
