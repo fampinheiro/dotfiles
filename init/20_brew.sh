@@ -13,7 +13,7 @@ e_header "Updating Homebrew"
 brew doctor
 
 if is_osx; then
-  brew bundle --file "$DOTFILES/misc/Brewfile.macos"
+  brew bundle --file "$DOTFILES/misc/Brewfile.macos" --cleanup
 elif is_ubuntu; then
-  brew bundle --file "$DOTFILES/misc/Brewfile.linux"
+  brew bundle --file "$DOTFILES/misc/Brewfile.linux" --cleanup
 fi 
