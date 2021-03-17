@@ -1,7 +1,6 @@
 is_osx || return 1
 # https://github.com/mathiasbynens/dotfiles/blob/main/.macos
 
-
 # require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -59,5 +58,9 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # photos
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+# power options
+sudo pmset -a displaysleep 1
+sudo pmset -b sleep 5
 
 killall Dock
