@@ -3,7 +3,9 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 brew "act"
+brew "autojump"
 brew "coreutils"
+brew "ffmpeg"
 brew "fish"
 brew "fzf"
 brew "gh"
@@ -11,6 +13,7 @@ brew "git"
 brew "git-extras"
 brew "gnupg"
 brew "grep"
+brew "htop"
 brew "jq"
 brew "mas"
 brew "neovim"
@@ -20,10 +23,14 @@ cask "1password-cli"
 cask "aws-vault"
 cask "font-fira-code"
 cask "keepassxc"
-cask "postico"
 cask "postman"
 cask "spotify"
+cask "telegram"
 mas "Dato", id: 1470584107
+mas "GarageBand", id: 682658836
+mas "Keynote", id: 409183694
 mas "Magnet", id: 441258766
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
 mas "Slack", id: 803453959
 mas "Xcode", id: 497799835
