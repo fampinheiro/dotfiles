@@ -7,8 +7,8 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-" navigation
-Plug 'airblade/vim-gitgutter'
+" Color scheme
+Plug 'chriskempson/base16-vim'
 
 " linter and friends
 Plug 'w0rp/ale'
@@ -21,6 +21,7 @@ Plug 'junegunn/fzf.vim'
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/git-messenger.vim'
+Plug 'airblade/vim-gitgutter'
 
 " easily surround sutff with tags, brackets, quotes, etc
 Plug 'tpope/vim-surround'
