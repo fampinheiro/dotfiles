@@ -18,14 +18,10 @@ brew "jq"
 brew "mas"
 brew "neovim"
 brew "ssh-copy-id"
-brew "starship"
 cask "1password-cli"
 cask "aws-vault"
 cask "font-fira-code"
-cask "keepassxc"
 cask "postman"
-cask "spotify"
-cask "telegram"
 mas "Dato", id: 1470584107
 mas "GarageBand", id: 682658836
 mas "Keynote", id: 409183694
