@@ -21,5 +21,6 @@ brew "ssh-copy-id"
 cask "1password-cli"
 cask "aws-vault"
 cask "font-fira-code"
+cask "visual-studio-code"
 mas "Magnet", id: 441258766
 mas "Xcode", id: 497799835
