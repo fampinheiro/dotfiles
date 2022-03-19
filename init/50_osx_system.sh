@@ -14,7 +14,7 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 # dock settings
 defaults write com.apple.dock tilesize -int 32
 defaults write com.apple.dock mineffect -string "scale"
-defaults write com.apple.dock orientation left
+defaults write com.apple.dock orientation bottom
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock showhidden -bool true
 defaults write com.apple.dock autohide-delay -float 0
